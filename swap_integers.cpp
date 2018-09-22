@@ -2,10 +2,14 @@
 
 int main()
 {
+
+	// Swap integers using addition
 	int a = 7;
 	int b = 1;
 
-	std::swap(a, b);
+	a = a + b;
+	b = a - b;
+	a = a - b;
 
 	cout << a << " " << b << "\n";
 
