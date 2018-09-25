@@ -1,6 +1,8 @@
 #include "std_lib_facilities.h"
 #include <map>
 
+
+// Needed so I can "switch strings"
 enum units {
 	cm,
 	in,
@@ -16,12 +18,15 @@ int main () {
 	sUnits["ft"] = ft;
 	sUnits["m"] = m;
 
+	// Define global variables and vectors
 	double sum = 0, smallest = TMP_MAX, largest;
 	vector<double> values;
 
+	// Main loop
 	while(true) {
 		cout << "\n\nEnter a number: ";
 
+		// Local variables
 		double input;
 		string unit;
 
@@ -33,6 +38,7 @@ int main () {
 
 		double converted = 0;
 
+		// Unit conversion
 		switch(sUnits[unit]) {
 			case cm:
 				converted = input/100.0;
@@ -67,11 +73,9 @@ int main () {
 	}
 
 	// Sort the values
-
 	sort(values.begin(), values.end());
 
 	// Summary
-
 	cout << "\n===========================================\n";
 	cout << "Smallest value: " << smallest << "m\n";
 	cout << "Largest value: " << largest << "m\n";
