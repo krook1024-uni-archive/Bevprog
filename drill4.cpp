@@ -16,7 +16,7 @@ int main () {
 	sUnits["ft"] = ft;
 	sUnits["m"] = m;
 
-	double sum = 0, smallest, largest;
+	double sum = 0, smallest = TMP_MAX, largest;
 	vector<double> values;
 
 	while(true) {
