@@ -22,9 +22,14 @@ int main () {
 	double sum = 0, smallest = TMP_MAX, largest;
 	vector<double> values;
 
+	// Let the user know of the valid formats
+	cout << "[!] Valid formats are: cm, in, ft, m.\n";
+	cout << "[!] Examples: '3m', '4in', '9ft', '20cm'.\n";
+	cout << "[!] To print the summary, enter '|'.";
+
 	// Main loop
 	while(true) {
-		cout << "\n\nEnter a number: ";
+		cout << "\n> Enter a value: ";
 
 		// Local variables
 		double input;
@@ -60,12 +65,12 @@ int main () {
 
 		if(converted <= smallest) {
 			smallest = converted;
-			cout << "> smallest so far\n";
+			cout << "+ smallest so far\n";
 		}
 
 		if(converted > largest) {
 			largest = converted;
-			cout << "> largest so far\n";
+			cout << "+ largest so far\n";
 		}
 
 		values.push_back(converted);
@@ -76,12 +81,12 @@ int main () {
 	sort(values.begin(), values.end());
 
 	// Summary
-	cout << "\n===========================================\n";
+	cout << "\n================SUMMARY====================\n";
 	cout << "Smallest value: " << smallest << "m\n";
 	cout << "Largest value: " << largest << "m\n";
 	cout << "Sum of those values: " << sum << "m\n";
 	cout << "# of inputs: " << values.size() << "\n";
-	cout << "Values one-by-one (increasing order):\n";
+	cout << "Values one-by-one (in increasing order):\n";
 
 	for(long unsigned int i=0; i < values.size(); i++) {
 		cout << "- " << values[i] << "m\n";
