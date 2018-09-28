@@ -10,7 +10,7 @@ int main () {
 		count ++;
 	}
 
-	cout << "\nAz a " << count << " lépés után lesz hamis.\n";
+	cout << "\nAz a " << count << " lépés után lesz 0.\n";
 
 	return 0;
 }
