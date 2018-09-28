@@ -3,7 +3,6 @@
 int main () {
 	int a = 1, count = 0;
 
-
 	while(a != 0)
 	{
 		a <<= 1;
