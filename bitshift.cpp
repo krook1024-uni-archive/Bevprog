@@ -1,7 +1,7 @@
 #include "std_lib_facilities.h"
 
 int main () {
-	int a = 1, count = 0;
+	unsigned int a = 1, count = 0;
 
 	while(a != 0)
 	{
