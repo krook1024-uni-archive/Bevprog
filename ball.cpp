@@ -6,7 +6,7 @@ class Labda {
 	public:
 	Labda();
 	void draw();
-	int xj = 0, xk = 0, yj = 0, yk = 0, mx = 0, my = 0;
+	int xj = 0, xk = 0, yj = 0, yk = 0, mx = 0, my = 0, h, w;
 };
 
 
@@ -22,7 +22,6 @@ Labda::Labda() {
 	cbreak();
 	noecho();
 	nodelay(stdscr, TRUE);
-	int h, w;
 	getmaxyx(stdscr, h, w);
 	mx = w*2;
 	my = h*2;
@@ -37,7 +36,7 @@ void Labda::draw() {
 
 	clear();
 
-        mvprintw (abs ((yj + (my - yk)) / 2), abs ((xj + (mx - xk)) / 2), "o");
+	mvprintw (abs ((yj + (my - yk)) / 2), abs ((xj + (mx - xk)) / 2), "o");
 
 	refresh();
 	usleep(30000);
