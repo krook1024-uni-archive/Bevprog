@@ -17,12 +17,15 @@ int main () {
 		cout << "\n> Enter a value: ";
 
 		// Local variables
+		bool isValid;
 		double input = 0.0;
 		string unit = "";
 
-		cin >> input >> unit;
-
-		if(!cin) {
+		if(cin >> input >> unit) {
+			isValid = true;
+		} else {
+			cin.clear();
+			cin.ignore();
 			break;
 		}
 
