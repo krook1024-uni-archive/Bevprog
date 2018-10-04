@@ -4,7 +4,7 @@ void errorline();
 
 int main () {
 	// Define global variables and vectors
-	double sum = 0, smallest = TMP_MAX, largest;
+	double sum = 0, smallest = numeric_limits<float>::max(), largest;
 	vector<double> values;
 
 	// Let the user know of the valid formats
@@ -49,6 +49,7 @@ int main () {
 		sum += converted;
 	}
 
+	// Only print summary if there are valid inputs stored
 	if(values.size() > 0) {
 		// Sort the values
 		sort(values.begin(), values.end());
