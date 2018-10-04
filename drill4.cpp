@@ -36,7 +36,7 @@ int main () {
 		if(isValid) {
 			if(unit == "cm") { converted = input/100.0; }
 			else if(unit == "in") { converted = (input * 2.54)/100.0; }
-			else if(unit == "ft") { converted = (input * 12.0 * 2.54); }
+			else if(unit == "ft") { converted = ((input * 12.0 * 2.54)/100.0); }
 			else if(unit == "m") { converted = input; }
 			else { errorline(); continue;}
 
