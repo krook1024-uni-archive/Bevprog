@@ -24,6 +24,7 @@ int main () {
 		if(cin >> input >> unit) {
 			isValid = true;
 		} else {
+			isValid = false;
 			cin.clear();
 			cin.ignore();
 			break;
@@ -32,24 +33,26 @@ int main () {
 		double converted = 0;
 
 		// Unit conversion
-		if(unit == "cm") { converted = input/100.0; }
-		else if(unit == "in") { converted = (input * 2.54)/100.0; }
-		else if(unit == "ft") { converted = (input * 12.0 * 2.54); }
-		else if(unit == "m") { converted = input; }
-		else { errorline(); continue;}
+		if(isValid) {
+			if(unit == "cm") { converted = input/100.0; }
+			else if(unit == "in") { converted = (input * 2.54)/100.0; }
+			else if(unit == "ft") { converted = (input * 12.0 * 2.54); }
+			else if(unit == "m") { converted = input; }
+			else { errorline(); continue;}
 
-		if(converted <= smallest) {
-			smallest = converted;
-			cout << "+ smallest so far\n";
+			if(converted <= smallest) {
+				smallest = converted;
+				cout << "+ smallest so far\n";
+			}
+
+			if(converted > largest) {
+				largest = converted;
+				cout << "+ largest so far\n";
+			}
+
+			values.push_back(converted);
+			sum += converted;
 		}
-
-		if(converted > largest) {
-			largest = converted;
-			cout << "+ largest so far\n";
-		}
-
-		values.push_back(converted);
-		sum += converted;
 	}
 
 	// Only print summary if there are valid inputs stored
