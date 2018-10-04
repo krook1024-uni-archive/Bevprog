@@ -1,5 +1,6 @@
 #include "std_lib_facilities.h"
-#include <map>
+
+void errorline();
 
 int main () {
 	// Define global variables and vectors
@@ -16,8 +17,8 @@ int main () {
 		cout << "\n> Enter a value: ";
 
 		// Local variables
-		double input;
-		string unit;
+		double input = 0.0;
+		string unit = "";
 
 		cin >> input >> unit;
 
@@ -32,7 +33,7 @@ int main () {
 		else if(unit == "in") { converted = (input * 2.54)/100.0; }
 		else if(unit == "ft") { converted = (input * 12.0 * 2.54); }
 		else if(unit == "m") { converted = input; }
-		else { break; }
+		else { errorline(); continue;}
 
 		if(converted <= smallest) {
 			smallest = converted;
@@ -48,21 +49,27 @@ int main () {
 		sum += converted;
 	}
 
-	// Sort the values
-	sort(values.begin(), values.end());
+	if(values.size() > 0) {
+		// Sort the values
+		sort(values.begin(), values.end());
 
-	// Summary
-	cout << "\n================SUMMARY====================\n";
-	cout << "Smallest value: " << smallest << "m\n";
-	cout << "Largest value: " << largest << "m\n";
-	cout << "Sum of those values: " << sum << "m\n";
-	cout << "# of inputs: " << values.size() << "\n";
-	cout << "Values one-by-one (in increasing order):\n";
+		// Summary
+		cout << "\n================SUMMARY====================\n";
+		cout << "Smallest value: " << smallest << "m\n";
+		cout << "Largest value: " << largest << "m\n";
+		cout << "Sum of those values: " << sum << "m\n";
+		cout << "# of inputs: " << values.size() << "\n";
+		cout << "Values one-by-one (in increasing order):\n";
 
-	for(long unsigned int i=0; i < values.size(); i++) {
-		cout << "- " << values[i] << "m\n";
+		for(long unsigned int i=0; i < values.size(); i++) {
+			cout << "- " << values[i] << "m\n";
+		}
+		cout << "\n===========================================\n";
 	}
-	cout << "\n===========================================\n";
 
 	return 0;
+}
+
+void errorline() {
+	cout << "[!] ERROR: Wrong format." << endl;
 }
