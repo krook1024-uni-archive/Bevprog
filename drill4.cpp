@@ -22,7 +22,7 @@ int main () {
 
 		cin >> input >> unit;
 
-		if(cin.fail()) {
+		if(!cin) {
 			break;
 		}
 
