@@ -28,25 +28,6 @@ int main () {
 		double converted = 0;
 
 		// Unit conversion
-		/*switch(sUnits[unit]) {
-			case cm:
-				converted = input/100.0;
-				break;
-			case in:
-				converted = (input * 2.54)/100.0;
-				break;
-			case ft:
-				converted = (input * 12.0 * 2.54);
-				break;
-			case m:
-				converted = input;
-				break;
-			default:
-				simple_error("illegal unit");
-				return(0);
-				break;
-		}*/
-
 		if(unit == "cm") { converted = input/100.0; }
 		else if(unit == "in") { converted = (input * 2.54)/100.0; }
 		else if(unit == "ft") { converted = (input * 12.0 * 2.54); }
