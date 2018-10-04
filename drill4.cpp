@@ -1,23 +1,7 @@
 #include "std_lib_facilities.h"
 #include <map>
 
-
-// Needed so I can "switch strings"
-enum units {
-	cm,
-	in,
-	ft,
-	m
-};
-
-map<string, units> sUnits;
-
 int main () {
-	sUnits["cm"] = cm;
-	sUnits["in"] = in;
-	sUnits["ft"] = ft;
-	sUnits["m"] = m;
-
 	// Define global variables and vectors
 	double sum = 0, smallest = TMP_MAX, largest;
 	vector<double> values;
@@ -44,7 +28,7 @@ int main () {
 		double converted = 0;
 
 		// Unit conversion
-		switch(sUnits[unit]) {
+		/*switch(sUnits[unit]) {
 			case cm:
 				converted = input/100.0;
 				break;
@@ -61,7 +45,13 @@ int main () {
 				simple_error("illegal unit");
 				return(0);
 				break;
-		}
+		}*/
+
+		if(unit == "cm") { converted = input/100.0; }
+		else if(unit == "in") { converted = (input * 2.54)/100.0; }
+		else if(unit == "ft") { converted = (input * 12.0 * 2.54); }
+		else if(unit == "m") { converted = input; }
+		else { break; }
 
 		if(converted <= smallest) {
 			smallest = converted;
