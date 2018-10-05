@@ -1,6 +1,5 @@
 #include "std_lib_facilities.h"
 
-
 void kiir(vector<double> tomb);
 double tavolsag(vector<double> pagerank, vector<double> pagerank_temp);
 
