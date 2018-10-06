@@ -22,17 +22,15 @@ int main() {
 		PRv.push_back(1.0 / 4.0);
 	}
 
-	long int h=0;
-
 	for(;;) {
-		for(int i=0; i<4; i++) {
+		for(int i=0; i<PR.size(); i++) {
 			PR[i] = PRv[i];
 		}
 
-		for(int i=0; i<4; i++) {
+		for(int i=0; i<PR.size(); i++) {
 			double temp = 0.0;
 
-			for(int j=0; j<4; j++) {
+			for(int j=0; j<PRv.size(); j++) {
 				temp += L[i][j] * PR[j];
 				PRv[i] = temp;
 			}
