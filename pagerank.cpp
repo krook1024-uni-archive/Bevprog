@@ -23,9 +23,7 @@ int main() {
 	}
 
 	for(;;) {
-		for(int i=0; i<PR.size(); i++) {
-			PR[i] = PRv[i];
-		}
+		PR = PRv;
 
 		for(int i=0; i<PR.size(); i++) {
 			double temp = 0.0;
