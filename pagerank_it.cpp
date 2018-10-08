@@ -26,7 +26,7 @@ int main() {
 	for(;;) {
 		PR = PRv;
 
-		for(int i=0; i<PR.size(); i++) {
+	for(int i=0; i<PR.size(); i++) {
 			double temp = 0.0;
 
 			for(int j=0; j<PRv.size(); j++) {
@@ -41,13 +41,14 @@ int main() {
 
 			for(col = row->begin(); col != row->end(); col++) {
 				auto i = distance(PRv.begin(), vvi);
-				auto j = distance(PR.begin(), vi);
+				PRv[i] += (*col) * (*vi);
 
-				vi = (*col) * (*vvi);
-				advance(vi, 1);
-				advance(vvi, 1);
+				vi ++;
+				vvi ++;
 			}
 		} //*/
+
+		break;
 
 		if(tavolsag(PR, PRv) < 0.000001) {
 			break;
