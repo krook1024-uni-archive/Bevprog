@@ -71,8 +71,12 @@ void kiir(vector<double> tomb) {
 double tavolsag(vector<double> pagerank, vector<double> pagerank_temp) {
 	double tav = 0.0;
 
-	for(int i=0; i < pagerank.size(); i++) {
-		tav += abs(pagerank[i] - pagerank_temp[i]);
+	vector<double>::iterator i = pagerank.begin();
+	vector<double>::iterator j = pagerank_temp.begin();
+
+	for(i = pagerank.begin(); i != pagerank.end(); i++) {
+		tav += abs((*i) - (*j));
+		j++;
 	}
 
 	return tav;
