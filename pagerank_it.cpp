@@ -6,7 +6,7 @@ void kiir(vector<double> tomb);
 double tavolsag(vector<double> pagerank, vector<double> pagerank_temp);
 
 int main() {
-	// Vektorok
+	// Vectors
 	vector<vector<double>> L = {
 		{0.0, 0.0, 1.0 / 3.0, 0.0},
 		{1.0, 1.0 / 2.0, 1.0 / 3.0, 1.0},
@@ -17,11 +17,11 @@ int main() {
 	vector<double> PR = {0.0, 0.0, 0.0, 0.0};
 	vector<double> PRv = {1.0 / 4.0, 1.0 / 4.0, 1.0 / 4.0, 1.0 / 4.0};
 
-	// Iterátorok
+	// Iterators
 	vector< vector<double> >::iterator row;
 	vector<double>::iterator col;
-	vector<double>::iterator vi;
-	vector<double>::iterator viv;
+	vector<double>::iterator vi; // Iterator for PR
+	vector<double>::iterator vvi; // Iterator for PRv
 
 	for(;;) {
 		PR = PRv;
@@ -33,9 +33,23 @@ int main() {
 				temp += L[i][j] * PR[j];
 				PRv[i] = temp;
 			}
-		}
+		} //*/
 
-		if(tavolsag(PR, PRv) < 0.00001) {
+/*		for(row = L.begin(); row != L.end(); row++) {
+			vi = PR.begin();
+			vvi = PRv.begin();
+
+			for(col = row->begin(); col != row->end(); col++) {
+				auto i = distance(PRv.begin(), vvi);
+				auto j = distance(PR.begin(), vi);
+
+				vi = (*col) * (*vvi);
+				advance(vi, 1);
+				advance(vvi, 1);
+			}
+		} //*/
+
+		if(tavolsag(PR, PRv) < 0.000001) {
 			break;
 		}
 	}
@@ -49,7 +63,7 @@ void kiir(vector<double> tomb) {
 	vector<double>::iterator i;
 
 	for(i = tomb.begin(); i != tomb.end(); i++) {
-		cout << "PageRank: " << *i << endl;
+		cout << "PageRank [" << distance(tomb.begin(), i) << "]: " << fixed << setprecision(6) << *i << endl;
 	}
 }
 
