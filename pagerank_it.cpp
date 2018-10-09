@@ -18,37 +18,25 @@ int main() {
 	vector<double> PRv = {1.0 / 4.0, 1.0 / 4.0, 1.0 / 4.0, 1.0 / 4.0};
 
 	// Iterators
-	vector< vector<double> >::iterator row;
-	vector<double>::iterator col;
+	vector< vector<double> >::iterator row; // Iterator for L
+	vector<double>::iterator col; // Iterator for L
 	vector<double>::iterator vi; // Iterator for PR
 	vector<double>::iterator vvi; // Iterator for PRv
 
 	for(;;) {
 		PR = PRv;
 
-	for(int i=0; i<PR.size(); i++) {
-			double temp = 0.0;
-
-			for(int j=0; j<PRv.size(); j++) {
-				temp += L[i][j] * PR[j];
-				PRv[i] = temp;
-			}
-		} //*/
-
-/*		for(row = L.begin(); row != L.end(); row++) {
-			vi = PR.begin();
-			vvi = PRv.begin();
-
+		int i = 0, j = 0;
+		for(row = L.begin(); row != L.end(); row++) {
+			double tmp = 0.0;
 			for(col = row->begin(); col != row->end(); col++) {
-				auto i = distance(PRv.begin(), vvi);
-				PRv[i] += (*col) * (*vi);
-
-				vi ++;
-				vvi ++;
+				tmp += *col * PR[j];
+				PRv[i] = tmp;
+				j++;
 			}
-		} //*/
-
-		break;
+			if(j % 3) j = 0;
+			i++;
+		}
 
 		if(tavolsag(PR, PRv) < 0.000001) {
 			break;
