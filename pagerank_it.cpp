@@ -20,8 +20,6 @@ int main() {
 	// Iterators
 	vector< vector<double> >::iterator row; // Iterator for L
 	vector<double>::iterator col; // Iterator for L
-	vector<double>::iterator vi; // Iterator for PR
-	vector<double>::iterator vvi; // Iterator for PRv
 
 	for(;;) {
 		PR = PRv;
