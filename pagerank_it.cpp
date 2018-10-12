@@ -1,5 +1,3 @@
-// [!] This script is under construction...
-
 #include "std_lib_facilities.h"
 
 void kiir(vector<double> &tomb);
