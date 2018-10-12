@@ -1,7 +1,7 @@
 #include "std_lib_facilities.h"
 
-void kiir(vector<double> &tomb);
-double tavolsag(vector<double> &pagerank, vector<double> &pagerank_temp);
+void print(vector<double> &tomb);
+double distance(vector<double> &pagerank, vector<double> &pagerank_temp);
 
 int main() {
 	// Vectors
@@ -34,17 +34,17 @@ int main() {
 			i++;
 		}
 
-		if(tavolsag(PR, PRv) < 0.000001) {
+		if(distance(PR, PRv) < 0.000001) {
 			break;
 		}
 	}
 
-	kiir(PR);
+	print(PR);
 
 	return 0;
 }
 
-void kiir(vector<double> &tomb) {
+void print(vector<double> &tomb) {
 	vector<double>::iterator i;
 
 	for(i = tomb.begin(); i != tomb.end(); i++) {
@@ -53,7 +53,7 @@ void kiir(vector<double> &tomb) {
 }
 
 
-double tavolsag(vector<double> &pr, vector<double> &pr_temp) {
+double distance(vector<double> &pr, vector<double> &pr_temp) {
 	double tav = 0.0;
 
 	vector<double>::iterator i = pr.begin();
