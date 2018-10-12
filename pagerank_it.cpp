@@ -2,8 +2,8 @@
 
 #include "std_lib_facilities.h"
 
-void kiir(vector<double> tomb);
-double tavolsag(vector<double> pagerank, vector<double> pagerank_temp);
+void kiir(vector<double> &tomb);
+double tavolsag(vector<double> &pagerank, vector<double> &pagerank_temp);
 
 int main() {
 	// Vectors
@@ -46,7 +46,7 @@ int main() {
 	return 0;
 }
 
-void kiir(vector<double> tomb) {
+void kiir(vector<double> &tomb) {
 	vector<double>::iterator i;
 
 	for(i = tomb.begin(); i != tomb.end(); i++) {
@@ -55,13 +55,13 @@ void kiir(vector<double> tomb) {
 }
 
 
-double tavolsag(vector<double> pagerank, vector<double> pagerank_temp) {
+double tavolsag(vector<double> &pr, vector<double> &pr_temp) {
 	double tav = 0.0;
 
-	vector<double>::iterator i = pagerank.begin();
-	vector<double>::iterator j = pagerank_temp.begin();
+	vector<double>::iterator i = pr.begin();
+	vector<double>::iterator j = pr_temp.begin();
 
-	for(i = pagerank.begin(); i != pagerank.end(); i++) {
+	for(i = pr.begin(); i != pr.end(); i++) {
 		tav += abs((*i) - (*j));
 		j++;
 	}
