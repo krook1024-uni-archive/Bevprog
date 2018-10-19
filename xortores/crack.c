@@ -1,21 +1,22 @@
 #define MAX_TITKOS 4096
 #define OLVASAS_BUFFER 256
-#define KULCS_MERET 3
+#define KULCS_MERET 8
 #define _GNU_SOURCE
 
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdlib.h>
 
 double atlagos_szohossz (const char *titkos, int titkos_meret);
 int tiszta_lehet (const char *titkos, int titkos_meret);
-void exor (const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret);
-int exor_tores (const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret);
+void exor (const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret, char *buffer);
+void exor_tores (const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret);
 
 int main (void) {
-	char kulcs[KULCS_MERET];
 	char titkos[MAX_TITKOS];
 	char *p = titkos;
+	char *kulcs;
 	int olvasott_bajtok;
 
 	// titkos fajt berantasa
@@ -28,15 +29,25 @@ int main (void) {
 		titkos[p - titkos + i] = '\0';
 	}
 
+	if ((kulcs = (char *)malloc(sizeof(char)*KULCS_MERET)) == NULL)
+	{
+		printf("Memoria (kulcs) faliora\n");
+		exit(-1);
+	}
+
+	int ii, ki, ji, li, mi, ni, oi, pi;
+#pragma omp paralell for private(kulcs, ii, ki, ji, li, mi, ni, oi, pi) shared(p, titkos)
 	// osszes kulcs eloallitasa
-	for (int ii = '0'; ii <= '9'; ++ii)
-		for (int ji = '0'; ji <= '9'; ++ji)
-			for (int ki = '0'; ki <= '9'; ++ki)
-				for (int li = '0'; li <= '9'; ++li)
-					for (int mi = '0'; mi <= '9'; ++mi)
-						for (int ni = '0'; ni <= '9'; ++ni)
-							for (int oi = '0'; oi <= '9'; ++oi)
-								for (int pi = '0'; pi <= '9'; ++pi) {
+	for (ii = '0'; ii <= '9'; ++ii)
+		for (ji = '0'; ji <= '9'; ++ji)
+			for (ki = '0'; ki <= '9'; ++ki)
+				for (li = '0'; li <= '9'; ++li)
+					for (mi = '0'; mi <= '9'; ++mi)
+						for (ni = '0'; ni <= '9'; ++ni)
+							for (oi = '0'; oi <= '9'; ++oi)
+								for (pi = '0'; pi <= '9'; ++pi) {
+									printf("%p\n", kulcs);
+
 									kulcs[0] = ii;
 									kulcs[1] = ji;
 									kulcs[2] = ki;
@@ -46,12 +57,7 @@ int main (void) {
 									kulcs[6] = oi;
 									kulcs[7] = pi;
 
-									if (exor_tores (kulcs, KULCS_MERET, titkos, p - titkos))
-									printf("Kulcs: [%c%c%c%c%c%c%c%c]\nTiszta szoveg: [%s]\n",
-									 ii, ji, ki, li, mi, ni, oi, pi, titkos);
-
-									// ujra EXOR-ozunk, igy nem kell egy masodik buffer
-									exor (kulcs, KULCS_MERET, titkos, p - titkos);
+									exor_tores(kulcs, KULCS_MERET, titkos, p - titkos);
 								}
 
 	return 0;
@@ -77,18 +83,32 @@ int tiszta_lehet (const char *titkos, int titkos_meret) {
 
 	return szohossz > 6.0 && szohossz < 9.0
 	&& strcasestr (titkos, "hogy") && strcasestr (titkos, "nem")
+	&& strcasestr (titkos, "és") && strcasestr (titkos, "mit")
 	&& strcasestr (titkos, "az") && strcasestr (titkos, "ha");
 }
 
-void exor (const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret) {
+void exor (const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret, char *buffer) {
 	int kulcs_index = 0;
 	for (int i = 0; i < titkos_meret; ++i) {
-		titkos[i] = titkos[i] ^ kulcs[kulcs_index];
+		buffer[i] = titkos[i] ^ kulcs[kulcs_index];
 		kulcs_index = (kulcs_index + 1) % kulcs_meret;
 	}
 }
 
-int exor_tores (const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret) {
-	exor (kulcs, kulcs_meret, titkos, titkos_meret);
-	return tiszta_lehet (titkos, titkos_meret);
+void exor_tores (const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret) {
+	char *buffer;
+
+	if ((buffer = (char *)malloc(sizeof(char)*titkos_meret)) == NULL) {
+		printf("Memoria (buffer) faliora\n");
+		exit(-1);
+	}
+
+	exor (kulcs, kulcs_meret, titkos, titkos_meret, buffer);
+
+	if(tiszta_lehet (buffer, titkos_meret)) {
+		printf("Kulcs: [%c%c%c%c%c%c%c%c]\nTiszta szoveg: [%s]\n",
+		kulcs[0],kulcs[1],kulcs[2],kulcs[3],kulcs[4],kulcs[5],kulcs[6],kulcs[7], buffer);
+	}
+
+	free(buffer);
 }
