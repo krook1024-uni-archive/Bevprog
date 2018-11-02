@@ -1,5 +1,7 @@
 # Usage
 
+Use **compile.sh** to compile files by their number. Or use **compile_all.sh** to compile all of them.
+
 For example:
 ```
 ./compile.sh 3
