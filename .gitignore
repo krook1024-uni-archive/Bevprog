@@ -32,3 +32,6 @@
 *.app
 
 *.pdf
+
+# Temporary files
+errors/*tmp*
