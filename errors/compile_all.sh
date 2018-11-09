@@ -2,6 +2,6 @@
 
 for i in `seq 1 25` ;
 do
-		echo "\n"$i".cpp: "
+		echo $'\n'""$i".cpp: "
 		./compile.sh $i
 done
