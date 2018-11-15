@@ -1,25 +1,9 @@
-
 //
 // This is example code from Chapter 6.7 "Trying the second version" of
 // "Software - Principles and Practice using C++" by Bjarne Stroustrup
 //
 
-/*
-	This file is known as calculator02buggy.cpp
-
-	I have inserted 5 errors that should cause this not to compile
-	I have inserted 3 logic errors that should cause the program to give wrong results
-
-	First try to find an remove the bugs without looking in the book.
-	If that gets tedious, compare the code to that in the book (or posted source code)
-
-	Happy hunting!
-
-*/
-
 #include "std_lib_facilities.h"
-
-//------------------------------------------------------------------------------
 
 class Token {
 public:
@@ -33,8 +17,6 @@ public:
     Token(char ch, double val):kind(ch), value(val) { }
 };
 
-//------------------------------------------------------------------------------
-
 class Token_stream {
 public: 
     Token_stream();             // make a Token_stream that reads from cin
@@ -45,24 +27,12 @@ private:
     Token buffer;               // here is where we keep a Token put back using putback()
 };
 
-//------------------------------------------------------------------------------
-
-// The constructor just sets full to indicate that the buffer is empty:
-
-// no Token in buffer
-Token_stream::Token_stream():full(false), buffer(0){ }
-
-//------------------------------------------------------------------------------
-
-// The putback() member function puts its argument back into the Token_stream's buffer:
 void Token_stream::putback(Token t)
 {
     if (full) error("putback() into a full buffer");
     buffer = t;       // copy t to buffer
     full = true;      // buffer is now full
 }
-
-//------------------------------------------------------------------------------
 
 Token Token_stream::get()
 {
@@ -97,17 +67,9 @@ Token Token_stream::get()
     }
 }
 
-//------------------------------------------------------------------------------
-
 Token_stream ts;        // provides get() and putback() 
 
-//------------------------------------------------------------------------------
-
-double expression();    // declaration so that primary() can call expression()
-
-//------------------------------------------------------------------------------
-
-// deal with numbers and parentheses
+double expression();
 double primary()
 {
     Token t = ts.get();
@@ -131,9 +93,6 @@ double primary()
     }
 }
 
-//------------------------------------------------------------------------------
-
-// deal with *, /, and %
 double term()
 {
     double left = primary();
@@ -160,9 +119,6 @@ double term()
     }
 }
 
-//------------------------------------------------------------------------------
-
-// deal with + and -
 double expression()
 {
     double left = term();      // read and evaluate a Term
@@ -186,8 +142,6 @@ double expression()
         }
     }
 }
-
-//------------------------------------------------------------------------------
 
 int main()
 try
