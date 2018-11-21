@@ -1,5 +1,4 @@
 /*
-
 BNF nyelvtan:
 
 			Expr ::= Term ('+' Term | '-' Term)*
@@ -9,7 +8,12 @@ BNF nyelvtan:
 
 Here * means the preceding element is repeated zero or more times, + means one or more repeats, square brackets means optional.
 */
+
 #include "std_lib_facilities.h"
+
+
+
+
 
 double parse_expr() {
 	double term = parse_term();
@@ -29,12 +33,13 @@ double parse_factor() {
 }
 
 int main() {
-try {
-	cout << "hw" << endl;
+    try {
+            cout << "hw" << endl;
 
-	return 0;
-}
-catch(...) {
-	cout << "something VERY bad happened...";
-}
+            return 0;
+    }
+
+    catch(...) {
+            cout << "something VERY bad happened...";
+    }
 }
