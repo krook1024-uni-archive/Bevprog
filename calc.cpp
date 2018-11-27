@@ -11,10 +11,6 @@ Here * means the preceding element is repeated zero or more times, + means one o
 
 #include "std_lib_facilities.h"
 
-
-
-
-
 double parse_expr() {
 	double term = parse_term();
 
