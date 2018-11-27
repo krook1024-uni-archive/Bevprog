@@ -1,41 +1,74 @@
-/*
-BNF nyelvtan:
-
-			Expr ::= Term ('+' Term | '-' Term)*
-			Term ::= Factor ('*' Factor | '/' Factor)*
-			Factor ::= ['-'] (Number | '(' Expr ')')
-			Number ::= Digit+
-
-Here * means the preceding element is repeated zero or more times, + means one or more repeats, square brackets means optional.
-*/
-
 #include "std_lib_facilities.h"
 
-double parse_expr() {
-	double term = parse_term();
+class Token
+{
+public:
+    char kind;
+    double value;
 
-	while(true) {
-
-	}
-}
-
-double parse_term() {
-	double factor = parse_factor();
-
-}
-
-double parse_factor() {
-	
-}
-
-int main() {
-    try {
-            cout << "hw" << endl;
-
-            return 0;
+    Token(char ch)
+    {
+        this->kind = ch;
+        this->value = 0;
     }
 
-    catch(...) {
-            cout << "something VERY bad happened...";
+    Token(char ch, double val)
+    {
+        this->kind = ch;
+        this->value = val;
+    }
+};
+
+class Token_stream 
+{
+public:
+    Token_stream()
+    {
+        this->full = false;
+        this->buffer = 0;
+    }
+
+    Token get()
+    {
+        if(full)
+        {
+            this->full = false;
+            return this->buffer;
+        }
+
+        char ch;
+        cin >> ch;
+
+        
+    }
+
+    void putback(Token t)
+    {
+        if(full) error("Putback() into a full buffer");
+        this->buffer = t;
+        this->full = true;
+    }
+    
+private:
+    bool full;
+    Token buffer;
+};
+
+int main()
+{
+    try
+    {        
+        while(cin)
+        {
+            
+        }
+
+        return 0;
+    }
+
+    catch (...)
+    {
+        cout << "bad things happened..." << endl;
+        return -1;
     }
 }
