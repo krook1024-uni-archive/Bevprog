@@ -5,7 +5,8 @@
 #define MAX_KULCS 100
 #define BUFFER_MERET 256
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
 	char kulcs[MAX_KULCS];
 	char buffer[BUFFER_MERET];
 
@@ -14,8 +15,9 @@ int main(int argc, char **argv) {
 
 	strncpy(kulcs, argv[1], MAX_KULCS);
 
-	while((olvasott_bajtok = read(0, (void *) buffer, BUFFER_MERET))) {
-		for(int i = 0; i < olvasott_bajtok; i++) {
+	while ((olvasott_bajtok =
+		read(0, (void *)buffer, BUFFER_MERET))) {
+		for (int i = 0; i < olvasott_bajtok; i++) {
 			buffer[i] = buffer[i] ^ kulcs[kulcs_index];
 			kulcs_index = (kulcs_index + 1) % kulcs_meret;
 		}
