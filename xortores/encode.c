@@ -15,14 +15,11 @@ int main(int argc, char **argv)
 
 	strncpy(kulcs, argv[1], MAX_KULCS);
 
-	while ((olvasott_bajtok =
-		read(0, (void *)buffer, BUFFER_MERET))) {
+	while ((olvasott_bajtok = read(0, (void *)buffer, BUFFER_MERET))) {
 		for (int i = 0; i < olvasott_bajtok; i++) {
 			buffer[i] = buffer[i] ^ kulcs[kulcs_index];
 			kulcs_index = (kulcs_index + 1) % kulcs_meret;
 		}
-
 		write(1, buffer, olvasott_bajtok);
-
 	}
 }

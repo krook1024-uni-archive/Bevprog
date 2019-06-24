@@ -10,10 +10,8 @@
 
 double atlagos_szohossz(const char *titkos, int titkos_meret);
 int tiszta_lehet(const char *titkos, int titkos_meret);
-void exor(const char kulcs[], int kulcs_meret, char titkos[],
-	  int titkos_meret, char *buffer);
-void exor_tores(const char kulcs[], int kulcs_meret, char titkos[],
-		int titkos_meret);
+void exor(const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret, char *buffer);
+void exor_tores(const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret);
 
 int main(void)
 {
@@ -23,16 +21,14 @@ int main(void)
 
 	// titkos fajt berantasa
 	int olvasott_bajtok;
-	while ((olvasott_bajtok =
-		read(0, (void *)p,
-		     (p - titkos + OLVASAS_BUFFER <
-		      MAX_TITKOS) ? OLVASAS_BUFFER : titkos +
-		     MAX_TITKOS - p)))
+	while ((olvasott_bajtok = read(0, (void *)p, (p - titkos + OLVASAS_BUFFER < MAX_TITKOS) ? OLVASAS_BUFFER : titkos +	MAX_TITKOS - p))) {
 		p += olvasott_bajtok;
+	}
 
 	// maradek hely nullazasa a titkos bufferben
-	for (int i = 0; i < MAX_TITKOS - (p - titkos); ++i)
+	for (int i = 0; i < MAX_TITKOS - (p - titkos); ++i) {
 		titkos[p - titkos + i] = '\0';
+	}
 
 	char ii, ki, ji, li, mi;
 
@@ -42,16 +38,9 @@ int main(void)
 		for (ji = 'A'; ji <= 'Z'; ++ji)
 			for (ki = 'A'; ki <= 'Z'; ++ki)
 				for (li = 'A'; li <= 'Z'; ++li)
-					for (mi = 'A'; mi <= 'Z';
-					     ++mi) {
-						if ((kulcs =
-						     (char *)
-						     malloc(sizeof
-							    (char) *
-							    KULCS_MERET))
-						    == NULL) {
-							printf
-							    ("Memoria (kulcs) faliora\n");
+					for (mi = 'A'; mi <= 'Z'; ++mi) {
+						if ((kulcs = (char *)malloc(KULCS_MERET)) == NULL) {
+							printf("Memoria (kulcs) faliora\n");
 							exit(-1);
 						}
 
@@ -61,11 +50,7 @@ int main(void)
 						kulcs[3] = li;
 						kulcs[4] = mi;
 
-						exor_tores(kulcs,
-							   KULCS_MERET,
-							   titkos,
-							   p -
-							   titkos);
+						exor_tores(kulcs, KULCS_MERET, titkos, p - titkos);
 					}
 
 	return 0;
@@ -92,13 +77,13 @@ int tiszta_lehet(const char *titkos, int titkos_meret)
 	double szohossz = atlagos_szohossz(titkos, titkos_meret);
 
 	return szohossz > 3.0 && szohossz < 9.0
-	    && strcasestr(titkos, "hogy") && strcasestr(titkos, "nem")
-	    && strcasestr(titkos, "ne")
-	    && strcasestr(titkos, "az") && strcasestr(titkos, "ha");
+		&& strcasestr(titkos, "hogy") && strcasestr(titkos, "nem")
+		&& strcasestr(titkos, "ne")
+		&& strcasestr(titkos, "az") && strcasestr(titkos, "ha");
 }
 
 void exor(const char kulcs[], int kulcs_meret, char titkos[],
-	  int titkos_meret, char *buffer)
+		int titkos_meret, char *buffer)
 {
 	int kulcs_index = 0;
 	for (int i = 0; i < titkos_meret; ++i) {
@@ -107,13 +92,11 @@ void exor(const char kulcs[], int kulcs_meret, char titkos[],
 	}
 }
 
-void exor_tores(const char kulcs[], int kulcs_meret, char titkos[],
-		int titkos_meret)
+void exor_tores(const char kulcs[], int kulcs_meret, char titkos[], int titkos_meret)
 {
 	char *buffer;
 
-	if ((buffer =
-	     (char *)malloc(sizeof(char) * titkos_meret)) == NULL) {
+	if ((buffer = (char *)malloc(titkos_meret)) == NULL) {
 		printf("Memoria (buffer) faliora\n");
 		exit(-1);
 	}
@@ -121,10 +104,9 @@ void exor_tores(const char kulcs[], int kulcs_meret, char titkos[],
 	exor(kulcs, kulcs_meret, titkos, titkos_meret, buffer);
 
 	if (tiszta_lehet(buffer, titkos_meret)) {
-		printf
-		    ("Kulcs: [%c%c%c%c%c%c%c%c]\nTiszta szoveg: [%s]\n",
-		     kulcs[0], kulcs[1], kulcs[2], kulcs[3], kulcs[4],
-		     kulcs[5], kulcs[6], kulcs[7], buffer);
+		printf("Kulcs: [%c%c%c%c%c%c%c%c]\nTiszta szoveg: [%s]\n",
+				kulcs[0], kulcs[1], kulcs[2], kulcs[3],
+				kulcs[4], kulcs[5], kulcs[6], kulcs[7], buffer);
 	}
 
 	free(buffer);
